@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
 import './Favorites.css';
 import { connect } from "react-redux";
-
+import { delGoodToCart } from "../../redux/actions/action";
 
 class Favorites extends Component {
-    // state = {
-    //     title: 'Новый список',
-    //     movies: [
-    //         { imdbID: 'tt0068646', title: 'The Godfather', year: 1972 }
-    //     ]
-    // }
     render() { 
         return (
             <div className="favorites">
                 <input value="Новый список" className="favorites__name" />
                 <ul className="favorites__list">
-                    {this.props.movies.map((item) => {
-                        return <li key={item.id}>{item.title} ({item.year})</li>;
+                    {this.props.cart.map((item) => {
+                        return <li key={item.imdbID}>{item.Title} ({item.Year})<button className='close' onClick={() => this.props.delGoodToCart(item.imdbID)}>x</button></li>;
                     })}
                 </ul>
                 <button type="button" className="favorites__save">Сохранить список</button>
@@ -26,7 +20,14 @@ class Favorites extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-      movies: state.cart 
+      cart: state.cart 
     }
   };
-  export default connect(mapStateToProps, null)(Favorites);
+  const mapDispatchToProps = dispatch => ({
+    delGoodToCart: (id) => {
+        let button =document.querySelector('.movie-item__add-button')
+        button.innerHTML = 'Добавить в список'
+      dispatch(delGoodToCart(id))
+    }
+  });
+  export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

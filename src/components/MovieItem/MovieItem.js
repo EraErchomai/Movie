@@ -4,15 +4,16 @@ import './MovieItem.css';
 import { connect } from "react-redux";
 import { addGoodToCart } from "../../redux/actions/action";
 
+
 class MovieItem extends Component {
     render() {
-        const { Title, Year, Poster, id } = this.props;
+        const { Title, Year, Poster, imdbID } = this.props;
         return (
             <article className="movie-item">
                 <img className="movie-item__poster" src={Poster} alt={Title} />
                 <div className="movie-item__info">
                     <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
-                    <button type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(id)}>Добавить в список</button>
+                            <button type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(imdbID)}>Добавить в список</button>
                 </div>
             </article>
         );
@@ -20,6 +21,8 @@ class MovieItem extends Component {
 }
 const mapDispatchToProps = dispatch => ({
     addGoodToCart: (id) => {
+        let button =document.querySelector('.movie-item__add-button')
+        button.innerHTML = 'Добавлено'
       dispatch(addGoodToCart(id))
     }
   });

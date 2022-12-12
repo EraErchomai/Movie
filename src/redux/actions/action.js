@@ -1,4 +1,5 @@
 export function addGoodToCart(id) {
+  console.log(id)
     return {
       type: 'ADD_GOOD_TO_CART',
       payload: {

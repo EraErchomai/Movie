@@ -46,11 +46,9 @@ class SearchBox extends Component {
  
 const mapDispatchToProps = dispatch => ({
     searchMovies: (name) => {
-        //console.log(name)
         fetch(`http://www.omdbapi.com/?s=${name}&apikey=8ab32c7f`)
         .then(res => res.json())
         .then(data => {
-            //console.log(data.Search)
             dispatch(searchMovies(data.Search))
         })
         .catch(error => {
