@@ -58,8 +58,7 @@ const mapStateToProps = (state) => {
 });
     },
     delGoodToCart: (id) => {
-        let button =document.querySelector('.movie-item__add-button')
-        button.innerHTML = 'Добавить в список'
+       
       dispatch(delGoodToCart(id))
     }
   });

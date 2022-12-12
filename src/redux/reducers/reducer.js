@@ -6,8 +6,8 @@ const initialState = {
 
 function reducer(state = initialState, action) {
     if (action.type === 'ADD_GOOD_TO_CART') {
-      let button =document.querySelector('.movie-item__add-button')
-        button.innerHTML = 'Добавлено'
+      let title =document.getElementById(`${action.payload.id}`)
+        title.innerHTML='Добавлено'
         const good = state.movies.find(item => 
     item.imdbID === action.payload.id);
     if(state.cart.indexOf(good) === -1) {
@@ -20,6 +20,8 @@ function reducer(state = initialState, action) {
         
       }
       else if (action.type === 'DEL_GOOD_FROM_CART') {
+        let title =document.getElementById(`${action.payload.id}`)
+        title.innerHTML='Добавить в список'
         const good = state.movies.find(item => 
     item.imdbID === action.payload.id);
     let c = state.cart

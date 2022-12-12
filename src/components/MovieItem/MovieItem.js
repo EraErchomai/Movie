@@ -13,7 +13,7 @@ class MovieItem extends Component {
                 <img className="movie-item__poster" src={Poster} alt={Title} />
                 <div className="movie-item__info">
                     <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
-                            <button type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(imdbID)}>Добавить в список</button>
+                            <button id={imdbID} type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(imdbID)}>Добавить в список</button>
                 </div>
             </article>
         );
@@ -21,8 +21,8 @@ class MovieItem extends Component {
 }
 const mapDispatchToProps = dispatch => ({
     addGoodToCart: (id) => {
-        let button =document.querySelector('.movie-item__add-button')
-        button.innerHTML = 'Добавлено'
+        // let button =document.querySelector('.movie-item__add-button')
+        // button.innerHTML = 'Добавлено'
       dispatch(addGoodToCart(id))
     }
   });
