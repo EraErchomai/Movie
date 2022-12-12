@@ -24,6 +24,7 @@ class Movies extends Component {
     //     ]
     // }
     render() { 
+        
         console.log(this.props.movies)
         return ( 
             <ul className="movies">
@@ -37,8 +38,10 @@ class Movies extends Component {
     }
 }
 const mapStateToProps = (state) => {
+    console.log(state.movies)
     return {
         movies: state.movies
     }
-  };
-  export default connect(mapStateToProps,null)(Movies);
+};
+
+export default connect(mapStateToProps, null)(Movies);

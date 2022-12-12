@@ -4,14 +4,6 @@ const initialState = {
 }
 
 function reducer(state = initialState, action) {
-    const getData = () => {
-        fetch("http://www.omdbapi.com/")
-          .then((res) => res.json())
-          .then((data) => {
-            this.setState({ movies: data });
-          });
-      };
-      console.log(state)
     if (action.type === 'ADD_GOOD_TO_CART') {
         const good = state.movies.find(item => 
     item.id === action.payload.id);
@@ -35,6 +27,15 @@ function reducer(state = initialState, action) {
           cart,
         }
       }
+      else if (action.type === 'SEARCH_MOVIE') {
+        const movies = action.payload.movies
+        console.log(movies)
+        return {
+          ...state,
+          movies
+        }
+      }
+      console.log(state)
       return state;
 }
 

@@ -6,12 +6,12 @@ import { addGoodToCart } from "../../redux/actions/action";
 
 class MovieItem extends Component {
     render() {
-        const { title, year, poster, id } = this.props;
+        const { Title, Year, Poster, id } = this.props;
         return (
             <article className="movie-item">
-                <img className="movie-item__poster" src={poster} alt={title} />
+                <img className="movie-item__poster" src={Poster} alt={Title} />
                 <div className="movie-item__info">
-                    <h3 className="movie-item__title">{title}&nbsp;({year})</h3>
+                    <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
                     <button type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(id)}>Добавить в список</button>
                 </div>
             </article>
