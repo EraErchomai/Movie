@@ -39,3 +39,7 @@
 .favorites__save:disabled {
     background-color: #d3d3d3;
 }
+
+.close {
+    margin-left: 50px;
+}

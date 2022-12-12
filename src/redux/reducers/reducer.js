@@ -6,15 +6,18 @@ const initialState = {
 
 function reducer(state = initialState, action) {
     if (action.type === 'ADD_GOOD_TO_CART') {
+      let button =document.querySelector('.movie-item__add-button')
+        button.innerHTML = 'Добавлено'
         const good = state.movies.find(item => 
     item.imdbID === action.payload.id);
     if(state.cart.indexOf(good) === -1) {
         var cart = [ ...state.cart, good ];
-    }
         return {
           ...state,
           cart,
         }
+    }
+        
       }
       else if (action.type === 'DEL_GOOD_FROM_CART') {
         const good = state.movies.find(item => 
@@ -23,6 +26,13 @@ function reducer(state = initialState, action) {
     const cart = c.filter(item => {
         return item !== good
     })
+    if(cart.length===0) {
+      let button = document.querySelector('.favorites__save')
+        button.style.display='block'
+        button.innerHTML='Сохранить список'
+        let link = document.querySelector('.nav-link')
+        link.style.display='none'
+    }
         return {
           ...state,
           cart,

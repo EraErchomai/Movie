@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import './ListPage.css';
 
+import { connect } from "react-redux";
+
 class ListPage extends Component {
-    state = {
-        movies: [
-            { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
-        ]
-    }
-    componentDidMount() {
-        const id = this.props.match.params;
-        console.log(id);
-        // TODO: запрос к сервер на получение списка
-        // TODO: запросы к серверу по всем imdbID
-    }
     render() { 
         return (
             <div className="list-page">
-                <h1 className="list-page__title">Мой список</h1>
+                <h1 className="list-page__title">{this.props.list.title}</h1>
                 <ul>
-                    {this.state.movies.map((item) => {
+                    {this.props.list.movies.map((item) => {
+                        let str = `https://www.imdb.com/title/${item.imdbID}/`
                         return (
                             <li key={item.imdbID}>
-                                <a href="https://www.imdb.com/title/tt0068646/" target="_blank">{item.title} ({item.year})</a>
+                                <a href={str} target="_blank">{item.Title} ({item.Year})</a>
                             </li>
                         );
                     })}
@@ -30,5 +22,10 @@ class ListPage extends Component {
         );
     }
 }
- 
-export default ListPage;
+const mapStateToProps = (state) => {
+    return {
+      list: state.list 
+    }
+  };
+
+  export default connect(mapStateToProps, null)(ListPage);

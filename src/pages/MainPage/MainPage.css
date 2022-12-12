@@ -15,5 +15,34 @@
 }
 
 .main-page__favorites {
-    width: 35%;   
+    width: 35%;
+    min-width: 300px;   
 }
+
+@media screen and (max-width:850px) {
+    .main-page__content {
+        flex-direction: column-reverse;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .main-page__favorites {
+        position: absolute;
+        top: 200px; 
+        width: 60vw;
+    }
+    .main-page__movies {
+        position: relative;
+        top: 250px;
+        min-width: 300px; 
+        width: 80vw;
+    }
+    .main-page__main-section {
+        padding-left: 40px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+    .search-box__form-input {
+        width: 60vw;
+    }
+} 
