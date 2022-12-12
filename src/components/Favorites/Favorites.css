@@ -4,6 +4,10 @@
     padding: 30px 20px;
 }
 
+.nav-link {
+    display: none;
+}
+
 .favorites__name {
     box-sizing: border-box;
     width: 100%;
@@ -30,4 +34,8 @@
     cursor: pointer;
     opacity: 0.9;
     transition: all 0.2s linear;
+}
+
+.favorites__save:disabled {
+    background-color: #d3d3d3;
 }

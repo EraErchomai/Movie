@@ -44,7 +44,9 @@ function reducer(state = initialState, action) {
       else if (action.type === 'SAVE_MOVIE') {
         const list = action.payload.list
       let button = document.querySelector('.favorites__save')
-        button.innerHTML='Перейти к списку'
+        button.style.display='none'
+        let link = document.querySelector('.nav-link')
+        link.style.display='block'
         return {
           ...state,
           list
