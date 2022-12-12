@@ -18,7 +18,6 @@ export function addGoodToCart(id) {
   }
 
   export function searchMovies(data) {
-    //console.log(data)
     return {
       type: 'SEARCH_MOVIE',
       payload: {
@@ -27,14 +26,11 @@ export function addGoodToCart(id) {
     }
   }
 
-// export function searchFromFetch(name) {
-//   fetch(`http://www.omdbapi.com/?s=${name}&apikey=8ab32c7f`)
-//         .then(res => res.json())
-//         .then(data => {
-//             console.log(data.Search)
-//             searchMovies(data.Search)
-//         })
-//         .catch(error => {
-//           console.log(error)
-//         })
-// }
+  export function saveMovies(data) {
+    return {
+      type: 'SAVE_MOVIE',
+      payload: {
+        list: data
+      }
+    }
+  }
