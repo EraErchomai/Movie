@@ -22,7 +22,7 @@ function reducer(state = initialState, action) {
       else if (action.type === 'DEL_GOOD_FROM_CART') {
         let title =document.getElementById(`${action.payload.id}`)
         title.innerHTML='Добавить в список'
-        const good = state.movies.find(item => 
+        const good = state.cart.find(item => 
     item.imdbID === action.payload.id);
     let c = state.cart
     const cart = c.filter(item => {

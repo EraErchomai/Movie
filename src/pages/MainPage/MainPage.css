@@ -16,7 +16,8 @@
 
 .main-page__favorites {
     width: 35%;
-    min-width: 300px;   
+    min-width: 250px; 
+    margin-right: 20px;  
 }
 
 @media screen and (max-width:850px) {
@@ -30,6 +31,7 @@
         position: absolute;
         top: 200px; 
         width: 60vw;
+        margin-left: 40px;
     }
     .main-page__movies {
         position: relative;
@@ -41,8 +43,5 @@
         padding-left: 40px;
         box-sizing: border-box;
         width: 100%;
-    }
-    .search-box__form-input {
-        width: 60vw;
     }
 } 
