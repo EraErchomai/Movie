@@ -3,6 +3,7 @@ import './MovieItem.css';
 
 import { connect } from "react-redux";
 import { addGoodToCart } from "../../redux/actions/action";
+import { changeButton } from "../../redux/actions/action";
 
 
 class MovieItem extends Component {
@@ -13,7 +14,7 @@ class MovieItem extends Component {
                 <img className="movie-item__poster" src={Poster} alt={Title} />
                 <div className="movie-item__info">
                     <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
-                    <button id={imdbID} type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(imdbID)}>
+                    <button id={imdbID} type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(imdbID, this.props.cart)}>
                         {add ? 'Добавлено' : 'Добавить в список'}</button>
                 </div>
             </article>
@@ -23,14 +24,16 @@ class MovieItem extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        movies: state.movies 
+        movies: state.movies,
+        cart: state.cart 
     }
 }
 const mapDispatchToProps = dispatch => ({
-    addGoodToCart: (id) => {
-        // let button =document.querySelector('.movie-item__add-button')
-        // button.innerHTML = 'Добавлено'
+    addGoodToCart: (id, cart) => {
+      dispatch(changeButton(id))
       dispatch(addGoodToCart(id))
+      let button = document.querySelector('.favorites__save');
+      button.removeAttribute('disabled');
     }
   });
   export default connect(mapStateToProps, mapDispatchToProps)(MovieItem);

@@ -33,3 +33,12 @@ export function addGoodToCart(id) {
       }
     }
   }
+
+  export function changeButton(id) {
+    return {
+      type: 'CHANGE_BUTTON',
+      payload: {
+        id: id
+      }
+    }
+  }

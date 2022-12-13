@@ -1,16 +1,33 @@
 const initialState = {
     cart: [],
     movies: [],
-    list: [],
-    arr: []
+    list: []
 }
 
 function reducer(state = initialState, action) {
     if (action.type === 'ADD_GOOD_TO_CART') {
         const good = state.movies.find(item => 
     item.imdbID === action.payload.id);
-    if(state.cart.indexOf(good) === -1) {
-        var cart = [ ...state.cart, good ];
+    if(state.cart.length!==0) {
+    for(let j=0; j<state.cart.length; j++) {
+      console.log(state.cart[j].imdbID)
+      console.log(good.imdbID )
+      if(good.imdbID !==  state.cart[j].imdbID ) {
+        let cart = [ ...state.cart, good ];
+      //     for(let j=0; j<state.movies.length; j++) {
+      //   if(state.movies[j].imdbID === good.imdbID ) {
+      //     state.movies[j].add = true
+      //   }
+      // }
+        return {
+          ...state,
+          cart,
+        }
+      }
+    }
+  }
+  else {
+    let cart = [ ...state.cart, good ];
           for(let j=0; j<state.movies.length; j++) {
         if(state.movies[j].imdbID === good.imdbID ) {
           state.movies[j].add = true
@@ -20,9 +37,35 @@ function reducer(state = initialState, action) {
           ...state,
           cart,
         }
+      }
+  }
+      if (action.type === 'CHANGE_BUTTON') {
+        let movies = state.movies;
+        movies = movies.map((item) => {
+            if (item.imdbID === action.payload.id) {
+              for(let j=0; j<state.cart.length; j++) {
+              if(item.imdbID !==  state.cart[j].imdbID ) {
+                let add = !(item.add);
+                console.log(item)
+                return {
+                    ...item,
+                    add
+                }
+              }
+            }
+            }
+            
+
+            return{
+                ...item
+            }
+        })
+        return{
+          ...state,
+          movies
+      }        
     }
         
-      }
       else if (action.type === 'DEL_GOOD_FROM_CART') {
         
         const good = state.cart.find(item => 
@@ -43,6 +86,11 @@ function reducer(state = initialState, action) {
       if(state.movies[j].imdbID === good.imdbID ) {
         state.movies[j].add = false
       }
+    }
+    let button = document.querySelector('.favorites__save');
+    if(cart.length===0) {
+      button.setAttribute('disabled', true)
+      console.log(button)
     }
         return {
           ...state,

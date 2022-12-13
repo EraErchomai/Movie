@@ -42,8 +42,30 @@
 
 @media screen and (max-width:850px) {
     
+    /* .search-box {
+        width: 70vw;
+    } */
     .search-box__form-input {
-        width: 62vw;
-        /* min-width: 220px; */
+        width: 65vw;
+    }
+}
+
+@media screen and (max-width:600px) {
+    
+    /* .search-box {
+        width: 75vw;
+    } */
+    .search-box__form-input {
+        width: 63vw;
+    }
+}
+
+@media screen and (max-width:460px) {
+    
+    /* .search-box {
+        width: 75vw;
+    } */
+    .search-box__form-input {
+        width: 58vw;
     }
 }

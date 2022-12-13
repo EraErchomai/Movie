@@ -3,6 +3,7 @@ import './Favorites.css';
 import { connect } from "react-redux";
 import { delGoodToCart } from "../../redux/actions/action";
 import { saveMovies } from "../../redux/actions/action";
+import { changeButton } from "../../redux/actions/action";
 import { Link } from 'react-router-dom';
 
 class Favorites extends Component {
@@ -11,21 +12,31 @@ class Favorites extends Component {
     }
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
+        console.log(this.props.cart.length)
+        let button = document.querySelector('.favorites__save');
+        console.log(button)
+        if(this.props.cart.length===0) {
+          button.setAttribute('disabled', true)
+          console.log(button)
+        }
+        else button.removeAttribute('disabled');
     }
-    searchLineChange = (e) => {
-      if(!this.state.searchLine && this.props.cart.lenght!==0) return true;
-      else return false
-  }
+  //   searchLineChange = () => {
+  //     console.log(!this.state.searchLine)
+  //     console.log(this.props.cart.lenght!==0)
+  //     if(!!this.state.searchLine && this.props.cart.lenght!==0) return false;
+  //     else return true
+  // }
     render() { 
         return (
             <div className="favorites">
                 <input placeholder='Введите название списка' className="favorites__name" onChange={this.searchLineChangeHandler} />
                 <ul className="favorites__list">
                     {this.props.cart.map((item) => {
-                        return <li key={item.imdbID}>{item.Title} ({item.Year})<button className='close' onClick={() => this.props.delGoodToCart(item.imdbID)}>x</button></li>;
+                        return <li key={item.imdbID}><button className='close' onClick={() => this.props.delGoodToCart(item.imdbID, this.props.cart)}>x</button>{item.Title} ({item.Year})</li>;
                     })}
                 </ul>
-                <button type="button" className="favorites__save" disabled={this.searchLineChange()} onClick={() => this.props.saveMovies(this.state.searchLine, this.props.cart)}>Сохранить список</button>
+                <button type="button" className="favorites__save" disabled onClick={() => this.props.saveMovies(this.state.searchLine, this.props.cart)}>Сохранить список</button>
                 <Link className="nav-link" to="/list/:id">
                   Перейти к списку
                 </Link>
@@ -61,9 +72,15 @@ const mapStateToProps = (state) => {
   console.log(error)
 });
     },
-    delGoodToCart: (id) => {
-       
+    delGoodToCart: (id, cart) => {
+      let button = document.querySelector('.favorites__save');
+      dispatch(changeButton(id))
       dispatch(delGoodToCart(id))
+      console.log(button)
+      // if(cart.length===0) {
+      //   button.setAttribute('disabled', true)
+      //   console.log(button)
+      // }
     }
   });
   export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

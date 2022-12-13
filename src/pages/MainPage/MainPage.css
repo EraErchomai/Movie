@@ -15,7 +15,7 @@
 }
 
 .main-page__favorites {
-    width: 35%;
+    width: 36%;
     /* min-width: 250px;  */
     margin-right: 20px;  
 }
@@ -27,7 +27,7 @@
     .main-page__favorites {
         position: absolute;
         top: 200px; 
-        width: 75vw;
+        width: 76vw;
         margin-left: 40px;
         min-width: 260px;
     }
@@ -35,7 +35,7 @@
         position: relative;
         top: 250px;
         min-width: 260px; 
-        width: 75vw;
+        width: 76vw;
     }
     .main-page__main-section {
         padding-left: 40px;
