@@ -29,12 +29,12 @@
         top: 200px; 
         width: 75vw;
         margin-left: 40px;
-        min-width: 255px;
+        min-width: 260px;
     }
     .main-page__movies {
         position: relative;
         top: 250px;
-        min-width: 255px; 
+        min-width: 260px; 
         width: 75vw;
     }
     .main-page__main-section {

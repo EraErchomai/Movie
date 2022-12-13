@@ -12,6 +12,10 @@ class Favorites extends Component {
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
     }
+    searchLineChange = (e) => {
+      if(!this.state.searchLine && this.props.cart.lenght!==0) return true;
+      else return false
+  }
     render() { 
         return (
             <div className="favorites">
@@ -21,7 +25,7 @@ class Favorites extends Component {
                         return <li key={item.imdbID}>{item.Title} ({item.Year})<button className='close' onClick={() => this.props.delGoodToCart(item.imdbID)}>x</button></li>;
                     })}
                 </ul>
-                <button type="button" className="favorites__save" disabled={!this.state.searchLine} onClick={() => this.props.saveMovies(this.state.searchLine, this.props.cart)}>Сохранить список</button>
+                <button type="button" className="favorites__save" disabled={this.searchLineChange()} onClick={() => this.props.saveMovies(this.state.searchLine, this.props.cart)}>Сохранить список</button>
                 <Link className="nav-link" to="/list/:id">
                   Перейти к списку
                 </Link>

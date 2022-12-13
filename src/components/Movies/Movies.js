@@ -6,9 +6,10 @@ import { connect } from "react-redux";
 
 class Movies extends Component {
     render() { 
+       
         return ( 
             <ul className="movies">
-                {this.props.movies.map((movie) => (
+                {this.props.movies.map((movie, i) => (
                     <li className="movies__item" key={movie.imdbID}>
                         <MovieItem {...movie} />
                     </li>
@@ -19,7 +20,7 @@ class Movies extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        movies: state.movies
+        movies: state.movies 
     }
 };
 

@@ -34,7 +34,7 @@ class SearchBox extends Component {
                         type="submit"
                         className="search-box__form-submit"
                         disabled={!searchLine}
-                        onClick={() => this.props.searchMovies(this.state.searchLine)}
+                        onClick={() => this.props.searchMovies(this.state.searchLine, this.props.cart)}
                     >
                         Искать
                     </button>
@@ -43,17 +43,41 @@ class SearchBox extends Component {
         );
     }
 }
- 
+const mapStateToProps = (state) => {
+    return {
+      cart: state.cart 
+    }
+  };
 const mapDispatchToProps = dispatch => ({
-    searchMovies: (name) => {
+    searchMovies: (name, favorites) => {
         fetch(`http://www.omdbapi.com/?s=${name}&apikey=8ab32c7f`)
         .then(res => res.json())
         .then(data => {
-            dispatch(searchMovies(data.Search))
+            let movies = data.Search.map((item) => {
+                return{
+                    ...item,
+                    add: false
+                }
+            })
+            if(favorites.length !== 0) {
+            for(let i=0; i<favorites.length; i++) {
+                // console.log(this.props.cart[i].imdbID )
+                // console.log(imdbID)
+                for(let j=0; j<movies.length; j++) {
+              if(movies[j].imdbID === favorites[i].imdbID ) {
+                //this.setState({ str:  'Добавлено' });
+                movies[j].add = true
+                //console.log(this.state.str)
+              }
+            }
+        }
+        }
+            dispatch(searchMovies(movies))
+
         })
         .catch(error => {
           console.log(error)
         })
     }
   });
-  export default connect(null, mapDispatchToProps)(SearchBox);
+  export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);

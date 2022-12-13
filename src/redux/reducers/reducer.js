@@ -1,17 +1,21 @@
 const initialState = {
     cart: [],
     movies: [],
-    list: []
+    list: [],
+    arr: []
 }
 
 function reducer(state = initialState, action) {
     if (action.type === 'ADD_GOOD_TO_CART') {
-      let title =document.getElementById(`${action.payload.id}`)
-        title.innerHTML='Добавлено'
         const good = state.movies.find(item => 
     item.imdbID === action.payload.id);
     if(state.cart.indexOf(good) === -1) {
         var cart = [ ...state.cart, good ];
+          for(let j=0; j<state.movies.length; j++) {
+        if(state.movies[j].imdbID === good.imdbID ) {
+          state.movies[j].add = true
+        }
+      }
         return {
           ...state,
           cart,
@@ -20,10 +24,10 @@ function reducer(state = initialState, action) {
         
       }
       else if (action.type === 'DEL_GOOD_FROM_CART') {
-        let title =document.getElementById(`${action.payload.id}`)
-        title.innerHTML='Добавить в список'
+        
         const good = state.cart.find(item => 
     item.imdbID === action.payload.id);
+    
     let c = state.cart
     const cart = c.filter(item => {
         return item !== good
@@ -35,19 +39,20 @@ function reducer(state = initialState, action) {
         let link = document.querySelector('.nav-link')
         link.style.display='none'
     }
+    for(let j=0; j<state.movies.length; j++) {
+      if(state.movies[j].imdbID === good.imdbID ) {
+        state.movies[j].add = false
+      }
+    }
         return {
           ...state,
           cart,
         }
       }
       else if (action.type === 'SEARCH_MOVIE') {
-        const movies = action.payload.movies
-        const b = movies.filter(item => {
-          return state.cart.indexOf(item) !== -1
-      })
-        b.forEach(item => {
-          item.closest('.movie-item__add-button').innerHTML='Добавлено'
-        });
+        
+        const movies = action.payload.movies  
+      
         return {
           ...state,
           movies

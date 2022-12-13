@@ -7,16 +7,23 @@ import { addGoodToCart } from "../../redux/actions/action";
 
 class MovieItem extends Component {
     render() {
-        const { Title, Year, Poster, imdbID } = this.props;
+        const { Title, Year, Poster, imdbID, add } = this.props;
         return (
             <article className="movie-item">
                 <img className="movie-item__poster" src={Poster} alt={Title} />
                 <div className="movie-item__info">
                     <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
-                            <button id={imdbID} type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(imdbID)}>Добавить в список</button>
+                    <button id={imdbID} type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(imdbID)}>
+                        {add ? 'Добавлено' : 'Добавить в список'}</button>
                 </div>
             </article>
         );
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        movies: state.movies 
     }
 }
 const mapDispatchToProps = dispatch => ({
@@ -26,4 +33,4 @@ const mapDispatchToProps = dispatch => ({
       dispatch(addGoodToCart(id))
     }
   });
-  export default connect(null, mapDispatchToProps)(MovieItem);
+  export default connect(mapStateToProps, mapDispatchToProps)(MovieItem);
