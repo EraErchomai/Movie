@@ -14,7 +14,7 @@ class MovieItem extends Component {
                 <img className="movie-item__poster" src={Poster} alt={Title} />
                 <div className="movie-item__info">
                     <h3 className="movie-item__title">{Title}&nbsp;({Year})</h3>
-                    <button id={imdbID} type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(imdbID, this.props.cart)}>
+                    <button id={imdbID} disabled={add} type="button" className="movie-item__add-button" onClick={() => this.props.addGoodToCart(imdbID)}>
                         {add ? 'Добавлено' : 'Добавить в список'}</button>
                 </div>
             </article>
@@ -29,11 +29,13 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = dispatch => ({
-    addGoodToCart: (id, cart) => {
-      dispatch(changeButton(id))
+    addGoodToCart: (id) => {
+      
       dispatch(addGoodToCart(id))
-      let button = document.querySelector('.favorites__save');
-      button.removeAttribute('disabled');
+      dispatch(changeButton(id))
+      
+    //   let button = document.querySelector('.favorites__save');
+    //   button.removeAttribute('disabled');
     }
   });
   export default connect(mapStateToProps, mapDispatchToProps)(MovieItem);

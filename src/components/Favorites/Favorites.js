@@ -36,7 +36,7 @@ class Favorites extends Component {
                         return <li key={item.imdbID}><button className='close' onClick={() => this.props.delGoodToCart(item.imdbID, this.props.cart)}>x</button>{item.Title} ({item.Year})</li>;
                     })}
                 </ul>
-                <button type="button" className="favorites__save" disabled onClick={() => this.props.saveMovies(this.state.searchLine, this.props.cart)}>Сохранить список</button>
+                <button type="button" className="favorites__save" disabled={!this.state.searchLine} onClick={() => this.props.saveMovies(this.state.searchLine, this.props.cart)}>Сохранить список</button>
                 <Link className="nav-link" to="/list/:id">
                   Перейти к списку
                 </Link>
