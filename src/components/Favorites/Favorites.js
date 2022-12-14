@@ -8,25 +8,15 @@ import { Link } from 'react-router-dom';
 
 class Favorites extends Component {
     state = {
-        searchLine: ''
+        searchLine: '',
+        saveButton: ''
     }
     searchLineChangeHandler = (e) => {
-        this.setState({ searchLine: e.target.value });
-        console.log(this.props.cart.length)
-        let button = document.querySelector('.favorites__save');
-        console.log(button)
-        if(this.props.cart.length===0) {
-          button.setAttribute('disabled', true)
-          console.log(button)
-        }
-        else button.removeAttribute('disabled');
+      if (e.target.value !== '' && this.props.cart.length !== 0)
+      this.setState({ saveButton: true });
+
+    else this.setState({ saveButton: false });
     }
-  //   searchLineChange = () => {
-  //     console.log(!this.state.searchLine)
-  //     console.log(this.props.cart.lenght!==0)
-  //     if(!!this.state.searchLine && this.props.cart.lenght!==0) return false;
-  //     else return true
-  // }
     render() { 
         return (
             <div className="favorites">
@@ -36,7 +26,7 @@ class Favorites extends Component {
                         return <li key={item.imdbID}><button className='close' onClick={() => this.props.delGoodToCart(item.imdbID, this.props.cart)}>x</button>{item.Title} ({item.Year})</li>;
                     })}
                 </ul>
-                <button type="button" className="favorites__save" disabled={!this.state.searchLine} onClick={() => this.props.saveMovies(this.state.searchLine, this.props.cart)}>Сохранить список</button>
+                <button type="button" className="favorites__save" disabled={!this.state.saveButton} onClick={() => this.props.saveMovies(this.state.searchLine, this.props.cart)}>Сохранить список</button>
                 <Link className="nav-link" to="/list/:id">
                   Перейти к списку
                 </Link>
@@ -72,7 +62,7 @@ const mapStateToProps = (state) => {
   console.log(error)
 });
     },
-    delGoodToCart: (id, cart) => {
+    delGoodToCart: (id) => {
       let button = document.querySelector('.favorites__save');
       dispatch(changeButton(id))
       dispatch(delGoodToCart(id))
