@@ -7,35 +7,12 @@ const initialState = {
 function reducer(state = initialState, action) {
   if (action.type === "ADD_GOOD_TO_CART") {
     const good = state.movies.find((item) => item.imdbID === action.payload.id);
-    // if (state.cart.length !== 0) {
-      // for (let j = 0; j < state.cart.length; j++) {
-      //   if (good.imdbID !== state.cart[j].imdbID) {
           let cart = [...state.cart, good];
           return {
             ...state,
             cart,
           };
-        // } else {
-        //   let cart = [...state.cart];
-        //   return {
-        //     ...state,
-        //     cart,
-        //   };
-        // }
       }
-    // } 
-    // else {
-    //   let cart = [...state.cart, good];
-    //   for (let j = 0; j < state.movies.length; j++) {
-    //     if (state.movies[j].imdbID === good.imdbID) {
-    //       state.movies[j].add = true;
-    //     }
-    //   }
-    //   return {
-    //     ...state,
-    //     cart,
-    //   };
-    // }
    if (action.type === "CHANGE_BUTTON") {
     let movies = [...state.movies];
     console.log(movies);
