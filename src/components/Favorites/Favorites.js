@@ -14,10 +14,14 @@ class Favorites extends Component {
     searchLineChangeHandler = (e) => {
       if (e.target.value !== '' && this.props.cart.length !== 0)
       this.setState({ saveButton: true });
+      
 
     else this.setState({ saveButton: false });
+    console.log(this.state.saveButton)
+    this.setState({ searchLine: `${e.target.value}` });
     }
     render() { 
+      console.log(this.props.save)
         return (
             <div className="favorites">
                 <input placeholder='Введите название списка' className="favorites__name" onChange={this.searchLineChangeHandler} />
@@ -36,7 +40,8 @@ class Favorites extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-      cart: state.cart 
+      cart: state.cart ,
+      save: state.save
     }
   };
   const mapDispatchToProps = dispatch => ({
@@ -66,11 +71,6 @@ const mapStateToProps = (state) => {
       let button = document.querySelector('.favorites__save');
       dispatch(changeButton(id))
       dispatch(delGoodToCart(id))
-      console.log(button)
-      // if(cart.length===0) {
-      //   button.setAttribute('disabled', true)
-      //   console.log(button)
-      // }
     }
   });
   export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

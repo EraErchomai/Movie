@@ -20,6 +20,10 @@
     margin-right: 20px;  
 }
 
+.main-page__movies {
+    margin-bottom: 250px;
+}
+
 @media screen and (max-width:850px) {
     .main-page__content {
         flex-direction: column-reverse;

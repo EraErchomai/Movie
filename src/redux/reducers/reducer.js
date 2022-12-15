@@ -2,10 +2,14 @@ const initialState = {
   cart: [],
   movies: [],
   list: [],
+  save: true
 };
 
 function reducer(state = initialState, action) {
   if (action.type === "ADD_GOOD_TO_CART") {
+    let input =document.querySelector('.favorites__name')
+    let button =document.querySelector('.favorites__save')
+    if(input.value !== '') button.disabled=false
     const good = state.movies.find((item) => item.imdbID === action.payload.id);
           let cart = [...state.cart, good];
           return {
@@ -15,7 +19,6 @@ function reducer(state = initialState, action) {
       }
    if (action.type === "CHANGE_BUTTON") {
     let movies = [...state.movies];
-    console.log(movies);
     movies = movies.map((item) => {
         if (item.imdbID === action.payload.id) {
             let add = !(item.add);
@@ -29,7 +32,6 @@ function reducer(state = initialState, action) {
             ...item
         }
     })
-    console.log(movies);
 
     return{
         ...state,
@@ -58,7 +60,6 @@ function reducer(state = initialState, action) {
     let button = document.querySelector(".favorites__save");
     if (cart.length === 0) {
       button.setAttribute("disabled", true);
-      console.log(button);
     }
     return {
       ...state,
